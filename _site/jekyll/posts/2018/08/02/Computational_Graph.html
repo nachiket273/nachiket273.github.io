@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Computational Graph: An Introduction | Nachiket Tanksale</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Computational Graph: An Introduction" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Computational Graphs" />
+<meta property="og:description" content="Computational Graphs" />
+<link rel="canonical" href="http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html" />
+<meta property="og:url" content="http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html" />
+<meta property="og:site_name" content="Nachiket Tanksale" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-08-02T01:13:12+05:30" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html","headline":"Computational Graph: An Introduction","dateModified":"2018-08-02T01:13:12+05:30","datePublished":"2018-08-02T01:13:12+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html"},"description":"Computational Graphs","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Nachiket Tanksale" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Nachiket Tanksale</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Computational Graph: An Introduction</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-08-02T01:13:12+05:30" itemprop="datePublished">Aug 2, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="computational-graphs">Computational Graphs</h1>
+
+<p>Computational Graph is interesting concept as form of it, is used in Neural Networks. Computational Graph consists of connected nodes where node can be:</p>
+
+<p>1) <strong>Operation</strong>: Oparation feeds output to other operations.<br />
+   2) <strong>Variable</strong>: Variable feeds input value to operations.<br />
+   3) <strong>Placeholder</strong>: Placeholder is special variable where value is inserted during run.<br /></p>
+
+<p>Output of the operation is called “tensor”. Tensor can be array(single or multi-dimentional), matrices or higher-dimentional tensors themselves.</p>
+
+<p>Here is example of computational graph from <a href="http://colah.github.io/">this amazing blog</a></p>
+
+<p><img src="http://localhost:4000/assets/tree-def.png" alt="Computational Graph Example" class="img-responsive" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">reload_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+
+<p>Let’s Define Class for Graph with operations, variables and placeholders.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">placeholders</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">defualt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">_default_graph</span>
+        <span class="n">_default_graph</span> <span class="o">=</span> <span class="bp">self</span>
+</code></pre></div></div>
+
+<h1 id="placeholder">Placeholder</h1>
+
+<p>These are used to provide runtime input values.<br />
+The class also contains the consumers for the placeholder.<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Placeholder</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consumers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_default_graph</span><span class="o">.</span><span class="n">placeholders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="variables">Variables</h1>
+
+<p>These are the inputs used by operations<br />
+The class also contains the consumers for variables <br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Variable</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">initial_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consumers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">_default_graph</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="operation">Operation</h1>
+
+<p>Operation has following elements:</p>
+
+<ol>
+  <li><strong>Compute</strong> : The operation</li>
+  <li><strong>Input Nodes</strong>: The variables of other operations to be used as input for compute.</li>
+  <li><strong>Consumers</strong>: The nodes which will consume the output of the operation</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Operation</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_nodes</span> <span class="o">=</span> <span class="p">[]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_nodes</span> <span class="o">=</span> <span class="n">input_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consumers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">input_node</span> <span class="ow">in</span> <span class="n">input_nodes</span><span class="p">:</span>
+            <span class="n">input_node</span><span class="o">.</span><span class="n">consumers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+        <span class="n">_default_graph</span><span class="o">.</span><span class="n">operations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<h1 id="elementary-operations---addition-and-matrix-multiplication">Elementary Operations - Addition and Matrix Multiplication</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Add</span><span class="p">(</span><span class="n">Operation</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span> <span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">y1</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MatMul</span><span class="p">(</span><span class="n">Operation</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">x1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="session-run-to-compute-output">Session Run To Compute Output</h1>
+
+<p>We’ll now create session class which will encapsulate the execution of compute graph<br />
+Run function of Session class will be called to compute<br />
+The input to the run function will be operation to be performed ( e in the above graph) and dictionary containing values for placeholders <br />
+<br />
+<br />
+<br />
+The operation needs to be calculated in correct order.<br />
+We’ll use postorder traversal to get correct sequence of operations.<br />
+We need to make sure the value of each input for operation O needs to be computed before computing operation O<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Session</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">feed_dict</span> <span class="o">=</span> <span class="p">{}):</span>
+        <span class="n">nodes_po</span> <span class="o">=</span> <span class="n">traverse_po</span><span class="p">(</span><span class="n">operation</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes_po</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="o">==</span> <span class="n">Placeholder</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">feed_dict</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="o">==</span> <span class="n">Variable</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">else</span><span class="p">:</span> 
+                <span class="n">node</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_node</span><span class="o">.</span><span class="n">output</span> <span class="k">for</span> <span class="n">input_node</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">input_nodes</span><span class="p">]</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="o">*</span><span class="n">node</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+                
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">operation</span><span class="o">.</span><span class="n">output</span>
+
+
+<span class="k">def</span> <span class="nf">traverse_po</span><span class="p">(</span><span class="n">operation</span><span class="p">):</span>
+    <span class="n">nodes_po</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">recurse</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">nodes_po</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nodes_po</span>
+
+<span class="k">def</span> <span class="nf">recurse</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">nodes_po</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Operation</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">input_node</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">input_nodes</span><span class="p">:</span>
+            <span class="n">recurse</span><span class="p">(</span><span class="n">input_node</span><span class="p">,</span> <span class="n">nodes_po</span><span class="p">)</span>
+    <span class="n">nodes_po</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="examples">Examples</h1>
+
+<h2 id="single-operation---addition--matrix-multiplication">Single Operation - Addition / Matrix Multiplication</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">defualt</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[11  8]
+ [13 13]]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">defualt</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">]])</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">MatMul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[48 52]
+ [83 67]]
+</code></pre></div></div>
+
+<h1 id="use-placeholder">Use Placeholder</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">defualt</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span>  <span class="n">Placeholder</span><span class="p">()</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="p">{</span><span class="n">y</span><span class="p">:[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]]})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[5 5]
+ [6 7]]
+</code></pre></div></div>
+
+<h1 id="multiple-operations">Multiple Operations</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Graph</span><span class="p">()</span><span class="o">.</span><span class="n">defualt</span><span class="p">()</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">Placeholder</span><span class="p">()</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">MatMul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="p">{</span><span class="n">X</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2 3]
+</code></pre></div></div>
+
+<h1 id="fin-">Fin !!!</h1>
+
+  </div><a class="u-url" href="/jekyll/posts/2018/08/02/Computational_Graph.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Nachiket Tanksale</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Nachiket Tanksale</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/nachiket273"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">nachiket273</span></a></li><li><a href="https://www.twitter.com/nachiket273"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">nachiket273</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>My Experiments With Deep Learning</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
