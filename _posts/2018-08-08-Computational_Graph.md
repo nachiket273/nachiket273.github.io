@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Computational Graph: An Introduction"
-date:   2018-08-02 01:13:12 +0530
+date:   2018-08-08 01:00:12 +0530
 categories: jekyll posts
 ---
 
@@ -234,6 +234,11 @@ print(res)
 ```
 
     [2 3]
+
+
+# References:
+1. [http://colah.github.io/](http://colah.github.io/)
+2. [http://www.deepideas.net](http://www.deepideas.net)
 
 
 # Fin !!!

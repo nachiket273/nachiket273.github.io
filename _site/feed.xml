@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-08T03:18:46+05:30</updated><id>http://localhost:4000/</id><title type="html">Nachiket Tanksale</title><subtitle>My Experiments With Deep Learning</subtitle><entry><title type="html">Computational Graph: An Introduction</title><link href="http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html" rel="alternate" type="text/html" title="Computational Graph: An Introduction" /><published>2018-08-02T01:13:12+05:30</published><updated>2018-08-02T01:13:12+05:30</updated><id>http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph</id><content type="html" xml:base="http://localhost:4000/jekyll/posts/2018/08/02/Computational_Graph.html">&lt;h1 id=&quot;computational-graphs&quot;&gt;Computational Graphs&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-09T01:25:03+05:30</updated><id>http://localhost:4000/</id><title type="html">Nachiket Tanksale</title><subtitle>My Experiments With Deep Learning</subtitle><entry><title type="html">Computational Graph: An Introduction</title><link href="http://localhost:4000/jekyll/posts/2018/08/08/Computational_Graph.html" rel="alternate" type="text/html" title="Computational Graph: An Introduction" /><published>2018-08-08T01:00:12+05:30</published><updated>2018-08-08T01:00:12+05:30</updated><id>http://localhost:4000/jekyll/posts/2018/08/08/Computational_Graph</id><content type="html" xml:base="http://localhost:4000/jekyll/posts/2018/08/08/Computational_Graph.html">&lt;h1 id=&quot;computational-graphs&quot;&gt;Computational Graphs&lt;/h1&gt;
 
 &lt;p&gt;Computational Graph is interesting concept as form of it, is used in Neural Networks. Computational Graph consists of connected nodes where node can be:&lt;/p&gt;
 
@@ -203,5 +203,11 @@ We need to make sure the value of each input for operation O needs to be compute
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[2 3]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://colah.github.io/&quot;&gt;http://colah.github.io/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.deepideas.net&quot;&gt;http://www.deepideas.net&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h1 id=&quot;fin-&quot;&gt;Fin !!!&lt;/h1&gt;</content><author><name></name></author><summary type="html">Computational Graphs</summary></entry></feed>
