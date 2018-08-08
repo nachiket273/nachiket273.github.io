@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Computational Graph: An Introduction"
-date:   2018-08-08 01:00:12 +0530
+date:   2018-08-09 00:28:12 +0530
 categories: jekyll posts
 ---
 
